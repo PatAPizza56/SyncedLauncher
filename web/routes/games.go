@@ -8,7 +8,7 @@ import (
 )
 
 func Games(c *fiber.Ctx) error {
-	page, err := template.ParseFiles("src/html/index.html")
+	page, err := template.ParseFiles("src/html/games/index.html")
 	if err != nil {
 		return err
 	}
