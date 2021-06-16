@@ -1,0 +1,72 @@
+h1,
+.h1 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-h1);
+  font-weight: var(--font-bold);
+  line-height: var(--font-h1-lh);
+  text-decoration: none;
+}
+
+h2,
+.h2 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-h2);
+  font-weight: var(--font-bold);
+  line-height: var(--font-h2-lh);
+  text-decoration: none;
+}
+
+h3,
+.h3 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-h3);
+  font-weight: var(--font-bold);
+  line-height: var(--font-h3-lh);
+  text-decoration: none;
+}
+
+h4,
+.h4 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-h4);
+  font-weight: var(--font-bold);
+  line-height: var(--font-h4-lh);
+  text-decoration: none;
+}
+
+h5,
+.h5 {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-h5);
+  font-weight: var(--font-bold);
+  line-height: var(--font-h5-lh);
+  text-decoration: none;
+}
+
+p,
+.p {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-p);
+  font-weight: var(--font-normal);
+  line-height: var(--font-p-lh);
+  text-decoration: none;
+}
+
+a,
+.a {
+  text-decoration: none;
+}
+
+small,
+.small {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-small);
+  font-weight: var(--font-normal);
+  line-height: var(--font-small-lh);
+  text-decoration: none;
+}
+
+b,
+.b {
+  font-weight: var(--font-bold);
+}

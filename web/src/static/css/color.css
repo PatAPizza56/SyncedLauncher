@@ -1,0 +1,127 @@
+.col-clr {
+  color: transparent;
+}
+
+.col-a1 {
+  color: var(--accent-100);
+}
+
+.col-a2 {
+  color: var(--accent-200);
+}
+
+.col-g1 {
+  color: var(--gray-100);
+}
+
+.col-g2 {
+  color: var(--gray-200);
+}
+
+.col-g3 {
+  color: var(--gray-300);
+}
+
+.col-g4 {
+  color: var(--gray-400);
+}
+
+.col-g5 {
+  color: var(--gray-500);
+}
+
+.bcol-clr {
+  background-color: transparent;
+}
+
+.bcol-a1 {
+  background-color: var(--accent-100);
+}
+
+.bcol-a2 {
+  background-color: var(--accent-200);
+}
+
+.bcol-g1 {
+  background-color: var(--gray-100);
+}
+
+.bcol-g2 {
+  background-color: var(--gray-200);
+}
+
+.bcol-g3 {
+  background-color: var(--gray-300);
+}
+
+.bcol-g4 {
+  background-color: var(--gray-400);
+}
+
+.bcol-g5 {
+  background-color: var(--gray-500);
+}
+
+.fcol-clr {
+  fill: none;
+}
+
+.fcol-a1 {
+  fill: var(--accent-100);
+}
+
+.fcol-a2 {
+  fill: var(--accent-200);
+}
+
+.fcol-g1 {
+  fill: var(--gray-100);
+}
+
+.fcol-g2 {
+  fill: var(--gray-200);
+}
+
+.fcol-g3 {
+  fill: var(--gray-300);
+}
+
+.fcol-g4 {
+  fill: var(--gray-400);
+}
+
+.fcol-g5 {
+  fill: var(--gray-500);
+}
+
+.scol-clr {
+  stroke: none;
+}
+
+.scol-a1 {
+  stroke: var(--accent-100);
+}
+
+.scol-a2 {
+  stroke: var(--accent-200);
+}
+
+.scol-g1 {
+  stroke: var(--gray-100);
+}
+
+.scol-g2 {
+  stroke: var(--gray-200);
+}
+
+.scol-g3 {
+  stroke: var(--gray-300);
+}
+
+.scol-g4 {
+  stroke: var(--gray-400);
+}
+
+.scol-g5 {
+  stroke: var(--gray-500);
+}

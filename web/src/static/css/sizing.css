@@ -1,0 +1,71 @@
+.wth-0 {
+  width: var(--size-0);
+}
+
+.wth-xsml {
+  width: var(--size-1);
+}
+
+.wth-sml {
+  width: var(--size-2);
+}
+
+.wth-med {
+  width: var(--size-3);
+}
+
+.wth-lge {
+  width: var(--size-4);
+}
+
+.wth-xlge {
+  width: var(--size-5);
+}
+
+.wth-xxlge {
+  width: var(--size-6);
+}
+
+.wth-xxxlge {
+  width: var(--size-7);
+}
+
+.wth-100 {
+  width: 100%;
+}
+
+.hgt-0 {
+  height: var(--size-0);
+}
+
+.hgt-xsml {
+  height: var(--size-1);
+}
+
+.hgt-sml {
+  height: var(--size-2);
+}
+
+.hgt-med {
+  height: var(--size-3);
+}
+
+.hgt-lge {
+  height: var(--size-4);
+}
+
+.hgt-xlge {
+  height: var(--size-5);
+}
+
+.hgt-xxlge {
+  height: var(--size-6);
+}
+
+.hgt-xxxlge {
+  height: var(--size-7);
+}
+
+.hgt-100 {
+  height: 100%;
+}
