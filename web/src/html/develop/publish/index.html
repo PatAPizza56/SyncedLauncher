@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="/static/icons/favicon.ico" />
+    <link rel="preload" href="/static/css/web.css" as="style" />
+    <link rel="preload" href="/static/css/global.css" as="style" />
+    <link rel="stylesheet" href="/static/css/web.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
+
+    <title>Synced Studios</title>
+  </head>
+
+  <body class="bcol-g5">
+    <div id="root" class="flx flx-1 flx-dir-col hgt-100">
+      <div>
+        <div
+          class="
+            flx flx-1 flx-dir-row flx-aln-ctr flx-jfy-btwn
+            hgt-xlge
+            pad-hor-xlge
+            bcol-g5
+          "
+        >
+          <a id="logoBtn" href="/home">
+            <svg width="46" height="26" viewBox="0 0 46 26" class="fcol-clr">
+              <path
+                stroke-width="4"
+                d="M23 13L13 23L3 13L13 3L23 13ZM23 13L33 3L43 13L33 23L23 13Z"
+                class="scol-a2"
+              />
+            </svg>
+          </a>
+
+          <div class="flx flx-1 flx-dir-row flx-aln-ctr flx-jfy-end">
+            <a
+              id="homeBtn"
+              href="/home"
+              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
+            >
+              <p>Home</p>
+            </a>
+            <a
+              id="shopBtn"
+              href="/shop"
+              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
+            >
+              <p>Shop</p>
+            </a>
+            <a
+              id="gamesBtn"
+              href="/games"
+              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
+            >
+              <p>Games</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flx flx-dir-col hgt-100 pad-hor-xlge mar-bot-lge" style="width: 50%;">
+          <div class="mar-bot-lge">
+            <h4 class="mar-bot-sml col-g1">Info</h1>
+            <div class="flx flx-1 flx-dir-col mar-bot-sml">
+              <p class="col-g1"><b>Title </b><small class="col-g2">(30 character limit)</small><br><small id="title-error" class="col-er"></small></p>
+              <input id="title" autocomplete="off" class="p pad-xsml mar-ver-xsml bor-rad-br1 bor-col-g3 bcol-g4 col-g1" style="border-width: 0.063rem; border-style: solid"></input>
+              <small class="col-g2">A game title should be <small class="col-a1">short</small>, and <small class="col-a1">memorable</small>. Any spaces in the title will be replaced with "<small class="col-a1">_</small>" in the URL.</small>
+            </div>
+            <div class="flx flx-1 flx-dir-col mar-bot-sml">
+              <p class="col-g1"><b>Description </b><small class="col-g2">(300 character limit)</small><br><small id="description-error" class="col-er"></small></p>
+              <textarea id="description" autocomplete="off" class="p pad-xsml mar-ver-xsml hgt-xxlge bor-rad-br1 bor-col-g3 bcol-g4 col-g1" style="border-width: 0.063rem; border-style: solid; resize: none;"></textarea>
+              <small class="col-g2">A description should <small class="col-a1">summarize</small> your game, <small class="col-a1">teach</small> how to play, and explain <small class="col-a1">features</small> the player should expect to find.</small>
+            </div>
+            <div class="flx flx-1 flx-dir-col mar-bot-sml">
+              <p class="col-g1"><b>Price </b><small class="col-g2">(USD)</small><br><small id="price-error" class="col-er"></small></p>
+              <input id="price" autocomplete="off" type="number" step="0.01" class="p pad-xsml mar-ver-xsml bor-rad-br1 bor-col-g3 bcol-g4 col-g1" style="border-width: 0.063rem; border-style: solid"></input>
+              <small class="col-g2">All pricing is in US Dollars. To publish a <small class="col-a1">free game</small>, input <small class="col-a1">0.00</small>.</small>
+            </div>
+          </div>
+
+          <div class="mar-bot-lge">
+            <h4 class="mar-bot-sml col-g1">Resources</h1>
+              <div class="flx flx-1 flx-dir-col mar-bot-sml">
+                <p class="col-g1"><b>Download URL </b><small class="col-g2">(Temporary! File uploads coming soon)</small><small id="downloadURL-error" class="col-er"><br></small></p>
+                <input id="downloadURL" autocomplete="off" class="p pad-xsml mar-ver-xsml bor-rad-br1 bor-col-g3 bcol-g4 col-g1" style="border-width: 0.063rem; border-style: solid"></input>
+                <small class="col-g2">A download URL is how the launcher will <small class="col-a1">install</small> game files. Please put the executable under " <small class="col-a1">/</small> " with a title of <small class="col-a1">build.exe</small></small>
+              </div>
+              <div class="flx flx-1 flx-dir-col mar-bot-sml">
+                <p class="col-g1"><b>Banner URL </b><small class="col-g2">(Temporary! File uploads coming soon)</small><small id="bannerURL-error" class="col-er"><br></small></p>
+                <input id="bannerURL" autocomplete="off" class="p pad-xsml mar-ver-xsml bor-rad-br1 bor-col-g3 bcol-g4 col-g1" style="border-width: 0.063rem; border-style: solid"></input>
+                <small class="col-g2">A banner URL must link to an <small class="col-a1">image</small> that will be displayed at the top of your games page. It should look good in <small class="col-a1">wide resolutions</small>.</small>
+              </div>
+          </div>
+
+          <div
+            id="submitBtn"
+            class="
+              flx flx-dir-col flx-aln-ctr flx-jfy-ctr
+              wth-xxlge
+              hgt-lge
+              bor-rad-br1
+              bcol-a2
+            "
+            style="cursor: pointer;"
+          >
+            <p class="col-g1"><b>Submit</b></p>
+            <small id="price" class="col-g1"></small>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <script>
+      function postGame() {
+        let title = document.getElementById("title").value;
+        let description = document.getElementById("description").value;
+        let price = document.getElementById("price").value;
+        let downloadURL = document.getElementById("downloadURL").value;
+        let bannerURL = document.getElementById("bannerURL").value;
+
+        var error = false;
+
+        if (title == "") { document.getElementById("title-error").textContent = "Title cannot be empty."; error = true; }
+        if (title.length > 30) { document.getElementById("title-error").textContent = "Title cannot contain over 30 characters."; error = true; }
+
+        if (description == "") { document.getElementById("description-error").textContent = "Description cannot be empty."; error = true; }
+        if (description.length > 300) { document.getElementById("description-error").textContent = "Description cannot contain over 300 characters."; error = true; }
+
+        if (error) { return; }
+
+        fetch("https://api.syncedstudios.com/games", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({UserID: 1, Title: title, Description: description, Price: price, DownloadURL: downloadURL, BannerURL: bannerURL})
+        }).then((err) => {
+          console.log(err)
+        })
+      }
+
+      logoBtn = document.getElementById("logoBtn");
+      homeBtn = document.getElementById("homeBtn");
+      shopBtn = document.getElementById("shopBtn");
+      gamesBtn = document.getElementById("gamesBtn");
+      submitBtn = document.getElementById("submitBtn");
+
+      submitBtn.addEventListener('click', function() {
+        postGame();
+      });
+
+      hover(
+        logoBtn,
+        () =>
+          addRemoveClass(logoBtn.children[0].children[0], "scol-a1", "scol-a2"),
+        () =>
+          addRemoveClass(logoBtn.children[0].children[0], "scol-a2", "scol-a1")
+      );
+      hover(
+        homeBtn,
+        () => addRemoveClass(homeBtn, "col-g1", "col-g2"),
+        () => addRemoveClass(homeBtn, "col-g2", "col-g1")
+      );
+      hover(
+        shopBtn,
+        () => addRemoveClass(shopBtn, "col-g1", "col-g2"),
+        () => addRemoveClass(shopBtn, "col-g2", "col-g1")
+      );
+      hover(
+        gamesBtn,
+        () => addRemoveClass(gamesBtn, "col-g1", "col-g2"),
+        () => addRemoveClass(gamesBtn, "col-g2", "col-g1")
+      );
+      hover(
+        submitBtn,
+        () => addRemoveClass(submitBtn, "bcol-a1", "bcol-a2"),
+        () => addRemoveClass(submitBtn, "bcol-a2", "bcol-a1")
+      );
+
+      function hover(element, enter, leave) {
+        element.onmouseenter = enter;
+        element.onmouseleave = leave;
+      }
+
+      function addClass(element, newClass) {
+        element.classList.add(newClass);
+      }
+
+      function removeClass(element, usedClass) {
+        element.classList.remove(usedClass);
+      }
+
+      function addRemoveClass(element, newClass, usedClass) {
+        element.classList.add(newClass);
+        element.classList.remove(usedClass);
+      }
+    </script>
+  </body>
+</html>

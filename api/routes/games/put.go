@@ -1,63 +1,46 @@
 package games
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/gofiber/fiber"
 
-	database "../../database"
-	structs "../../structs"
+	"../../structs"
+	"../../utils"
 )
 
 func Put(c *fiber.Ctx) error {
 	game := new(structs.Game)
+	var user structs.User
 
-	err := c.BodyParser(game)
+	err, stat := game.Get(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	err, stat = user.GetByToken(c.Query("token"))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	if game.UserID != user.ID {
+		c.Status(fiber.StatusUnauthorized)
+		return c.Send([]byte("Token not valid"))
+	}
+
+	err = c.BodyParser(game)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.Send([]byte("Failed to parse body"))
 	}
 
-	status, message := update(c.Query("method"), strings.ReplaceAll(c.Params("value"), "%20", " "), *game)
+	game.UserID = user.ID
 
-	c.Status(status)
-	return c.Send([]byte(message))
-}
-
-func update(method string, value string, game structs.Game) (int, string) {
-	var request string
-
-	userID := game.UserID
-	title := game.Title
-	description := game.Description
-	price := game.Price
-	downloadURL := game.DownloadURL
-	donationURL := game.DonationURL
-	bannerURL := game.BannerURL
-
-	if userID == 0 || title == "" || description == "" || price == "" || downloadURL == "" || donationURL == "" || bannerURL == "" {
-		return fiber.StatusBadRequest, "Please attatch all fields of information (UserID, Title, Description, Price, DownloadURL, DonationURL, BannerURL)"
-	}
-
-	if method == "id" {
-		request = fmt.Sprintf(
-			`UPDATE "Games"
-      SET "UserID" = '%v', "Title" = '%v', "Description" = '%v', "Price" = '%v', "DownloadURL" = '%v', "DonationURL" = '%v', "BannerURL" = '%v'
-      WHERE "ID" = '%v';`,
-			userID, title, description, price, downloadURL, donationURL, bannerURL, value)
-	} else if method == "title" {
-		request = fmt.Sprintf(
-			`UPDATE "Games"
-      SET "UserID" = '%v', "Title" = '%v', "Description" = '%v', "Price" = '%v', "DownloadURL" = '%v', "DonationURL" = '%v', "BannerURL" = '%v'
-      WHERE "Title" = '%v';`,
-			userID, title, description, price, downloadURL, donationURL, bannerURL, value)
-	}
-
-	_, err := database.DB.Exec(request)
+	err, stat = game.Put(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
 	if err != nil {
-		return fiber.StatusBadRequest, "Failed to execute database command, please recheck all fields of information. (Title and DownloadURL must be unique)"
+		c.Status(stat)
+		return c.Send([]byte(err.Error()))
 	}
 
-	return fiber.StatusOK, "Success"
+	return c.Send([]byte("Success"))
 }

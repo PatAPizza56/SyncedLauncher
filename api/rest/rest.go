@@ -4,8 +4,10 @@ import (
 	"github.com/gofiber/fiber"
 	"github.com/gofiber/fiber/middleware/cors"
 
-	games "../routes/games"
-	users "../routes/users"
+	"../routes/auth/login"
+	"../routes/auth/register"
+	"../routes/games"
+	"../routes/users"
 )
 
 func Start() {
@@ -17,6 +19,8 @@ func Start() {
 		AllowHeaders:  "Origin, Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
 		ExposeHeaders: "Origin",
 	}))
+
+	app.Use()
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Welcome to the Synced Studios API")
@@ -30,6 +34,9 @@ func Start() {
 	app.Get("/users/:value", users.Get)
 	app.Put("/users/:value", users.Put)
 	app.Delete("/users/:value", users.Delete)
+
+	app.Post("/auth/login", login.Post)
+	app.Post("/auth/register", register.Post)
 
 	app.Listen(":8000")
 }

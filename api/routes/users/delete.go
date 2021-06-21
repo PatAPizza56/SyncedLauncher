@@ -1,34 +1,47 @@
-package games
+package users
 
 import (
-	"fmt"
-	"strings"
+	"strconv"
 
 	"github.com/gofiber/fiber"
 
-	database "../../database"
+	"../../structs"
+	"../../utils"
 )
 
 func Delete(c *fiber.Ctx) error {
-	status, message := remove(c.Query("method"), strings.ReplaceAll(c.Params("value"), "%20", " "))
+	var user structs.User
+	var aUser structs.User
+	var token structs.Token
 
-	c.Status(status)
-	return c.Send([]byte(message))
-}
-
-func remove(method string, value string) (int, string) {
-	var request string
-
-	if method == "id" {
-		request = fmt.Sprintf(`DELETE FROM "Users" WHERE "ID" = '%v'`, value)
-	} else if method == "username" {
-		request = fmt.Sprintf(`DELETE FROM "Users" WHERE "Username" = '%v'`, value)
-	}
-
-	_, err := database.DB.Exec(request)
+	err, stat := user.Get(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
 	if err != nil {
-		return fiber.StatusBadRequest, "Failed to located user, please recheck all fields of information"
+		c.Status(stat)
+		return err
 	}
 
-	return fiber.StatusOK, "Success"
+	err, stat = aUser.GetByToken(c.Query("token"))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	if user.ID != aUser.ID {
+		c.Status(fiber.StatusUnauthorized)
+		return c.Send([]byte("Token not valid"))
+	}
+
+	err, stat = user.Delete(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	err, stat = token.Delete("UserID", strconv.Itoa(user.ID))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	return c.Send([]byte("Success"))
 }

@@ -1,59 +1,65 @@
-package games
+package users
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/gofiber/fiber"
+	"golang.org/x/crypto/bcrypt"
 
-	database "../../database"
-	structs "../../structs"
+	"../../structs"
+	"../../utils"
 )
 
 func Put(c *fiber.Ctx) error {
 	user := new(structs.User)
+	var aUser structs.User
 
-	err := c.BodyParser(user)
+	err, stat := user.Get(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	err, stat = aUser.GetByToken(c.Query("token"))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	if user.ID != aUser.ID {
+		c.Status(fiber.StatusUnauthorized)
+		return c.Send([]byte("Token not valid"))
+	}
+
+	err = c.BodyParser(user)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.Send([]byte("Failed to parse body"))
 	}
 
-	status, message := update(c.Query("method"), strings.ReplaceAll(c.Params("value"), "%20", " "), *user)
-
-	c.Status(status)
-	return c.Send([]byte(message))
-}
-
-func update(method string, value string, user structs.User) (int, string) {
-	var request string
-
-	username := user.Username
-	email := user.Email
-	pfpURL := user.PFPURL
-
-	if username == "" || email == "" || pfpURL == "" {
-		return fiber.StatusBadRequest, "Please attatch all fields of information (Username, Email, PFPURL)"
+	if len(user.Username) < 2 {
+		c.Status(fiber.StatusBadRequest)
+		return c.Send([]byte("Username must be at least 2 characters long"))
+	} else if !strings.Contains(user.Email, "@") {
+		c.Status(fiber.StatusBadRequest)
+		return c.Send([]byte("Please enter a valid email"))
+	} else if len(user.Password) < 8 {
+		c.Status(fiber.StatusBadRequest)
+		return c.Send([]byte("Password must be at least 8 characters long"))
 	}
 
-	if method == "id" {
-		request = fmt.Sprintf(
-			`UPDATE "Users"
-      SET "Username" = '%v', "Email" = '%v', "PFPURL" = '%v'
-      WHERE "ID" = '%v';`,
-			username, email, pfpURL, value)
-	} else if method == "username" {
-		request = fmt.Sprintf(
-			`UPDATE "Users"
-      SET "Username" = '%v', "Email" = '%v', "PFPURL" = '%v'
-      WHERE "Username" = '%v';`,
-			username, email, pfpURL, value)
-	}
-
-	_, err := database.DB.Exec(request)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
-		return fiber.StatusBadRequest, "Failed to execute database command, please recheck all fields of information. (Username and Email must be unique)"
+		c.Status(fiber.StatusConflict)
+		return c.Send([]byte("Failed to hash password"))
+	}
+	user.Password = string(hashedPassword)
+
+	err, stat = user.Put(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
+	if err != nil {
+		c.Status(stat)
+		return c.Send([]byte(err.Error()))
 	}
 
-	return fiber.StatusOK, "Success"
+	return c.Send([]byte("Success"))
 }

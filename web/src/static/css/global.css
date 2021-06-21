@@ -1,0 +1,30 @@
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--gray-300);
+  border-radius: 0.5rem;
+}
+*::-webkit-resizer {
+  background-color: transparent;
+}
+input:focus {
+  outline: none !important;
+  border: 1px solid var(--accent-100);
+}
+textarea:focus {
+  outline: none !important;
+  border: 1px solid var(--accent-100);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

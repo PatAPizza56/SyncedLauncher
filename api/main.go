@@ -1,8 +1,8 @@
 package main
 
 import (
-	database "./database"
-	rest "./rest"
+	"./database"
+	"./rest"
 )
 
 func main() {

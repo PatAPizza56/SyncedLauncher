@@ -1,34 +1,38 @@
 package games
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/gofiber/fiber"
 
-	database "../../database"
+	"../../structs"
+	"../../utils"
 )
 
 func Delete(c *fiber.Ctx) error {
-	status, message := remove(c.Query("method"), strings.ReplaceAll(c.Params("value"), "%20", " "))
+	var game structs.Game
+	var user structs.User
 
-	c.Status(status)
-	return c.Send([]byte(message))
-}
-
-func remove(method string, value string) (int, string) {
-	var request string
-
-	if method == "id" {
-		request = fmt.Sprintf(`DELETE FROM "Games" WHERE "ID" = '%v'`, value)
-	} else if method == "title" {
-		request = fmt.Sprintf(`DELETE FROM "Games" WHERE "Title" = '%v'`, value)
-	}
-
-	_, err := database.DB.Exec(request)
+	err, stat := game.Get(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
 	if err != nil {
-		return fiber.StatusBadRequest, "Failed to located game, please recheck all fields of information"
+		c.Status(stat)
+		return err
 	}
 
-	return fiber.StatusOK, "Success"
+	err, stat = user.GetByToken(c.Query("token"))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	if game.UserID != user.ID {
+		c.Status(fiber.StatusUnauthorized)
+		return c.Send([]byte("Token not valid"))
+	}
+
+	err, stat = game.Delete(utils.Method(c.Query("method")), utils.Value(c.Params("value")))
+	if err != nil {
+		c.Status(stat)
+		return err
+	}
+
+	return c.Send([]byte("Success"))
 }

@@ -7,13 +7,15 @@
 
     <link rel="icon" type="image/png" href="/static/icons/favicon.ico" />
     <link rel="preload" href="/static/css/web.css" as="style" />
+    <link rel="preload" href="/static/css/global.css" as="style" />
     <link rel="stylesheet" href="/static/css/web.css" />
+    <link rel="stylesheet" href="/static/css/global.css" />
 
     <title>Synced Studios</title>
   </head>
 
   <body class="bcol-g5">
-    <div id="root" class="flx flx-1 flx-dir-col hgt-100">
+    <div id="root" class="flx flx-1 flx-dir-col hgt-100 mar-bot-lge">
       <div>
         <div
           class="
@@ -142,7 +144,7 @@
 
     <script>
       window.onload = function () {
-        title = window.location.pathname.split("/")[2].replace("_", "%20");
+        title = window.location.pathname.split("/")[2].replaceAll("_", "%20");
 
         fetch("https://api.syncedstudios.com/games/" + title + "?method=title")
           .then((response) => {
@@ -165,6 +167,7 @@
             document.getElementById("price").textContent = gameData.Price;
             document.getElementById("description").textContent =
               gameData.Description;
+            document.title = gameData.Title;
           })
           .catch((err) => {
             console.log(err);

@@ -1,16 +1,17 @@
 package games
 
 import (
-	"fmt"
+	"strconv"
 
 	"github.com/gofiber/fiber"
 
-	database "../../database"
-	structs "../../structs"
+	"../../structs"
 )
 
 func Post(c *fiber.Ctx) error {
+	var id int
 	game := new(structs.Game)
+	var user structs.User
 
 	err := c.BodyParser(game)
 	if err != nil {
@@ -18,34 +19,19 @@ func Post(c *fiber.Ctx) error {
 		return c.Send([]byte("Failed to parse body"))
 	}
 
-	status, message := insert(*game)
-
-	c.Status(status)
-	return c.Send([]byte(message))
-}
-
-func insert(game structs.Game) (int, string) {
-	userID := game.UserID
-	title := game.Title
-	description := game.Description
-	price := game.Price
-	downloadURL := game.DownloadURL
-	donationURL := game.DonationURL
-	bannerURL := game.BannerURL
-
-	if userID == 0 || title == "" || description == "" || price == "" || downloadURL == "" || donationURL == "" || bannerURL == "" {
-		return fiber.StatusBadRequest, "Please attatch all fields of information (UserID, Title, Description, Price, DownloadURL, DonationURL, BannerURL)"
-	}
-
-	request := fmt.Sprintf(
-		`INSERT INTO "Games" ("UserID", "Title", "Description", "Price", "DownloadURL", "DonationURL", "BannerURL")
-    VALUES ('%v', '%v', '%v', '%v', '%v', '%v', '%v');`,
-		userID, title, description, price, downloadURL, donationURL, bannerURL)
-
-	_, err := database.DB.Exec(request)
+	err, stat := user.GetByToken(c.Query("token"))
 	if err != nil {
-		return fiber.StatusBadRequest, "Failed to execute database command, please recheck all fields of information. (Title and DownloadURL must be unique)"
+		c.Status(stat)
+		return err
 	}
 
-	return fiber.StatusOK, "Success"
+	game.UserID = user.ID
+
+	err, stat = game.Post(&id)
+	if err != nil {
+		c.Status(stat)
+		return c.Send([]byte(err.Error()))
+	}
+
+	return c.Send([]byte(strconv.Itoa(id)))
 }
