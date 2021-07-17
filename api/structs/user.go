@@ -10,22 +10,23 @@ import (
 
 type User struct {
 	ID       int
+	FullName string
 	Username string
 	Email    string
 	Password string
-	PFPURL   string
+	PfpURL   string
 }
 
 func (user *User) Post(id *int) (error, int) {
-	fields := []string{"Username", "Email", "Password", "PFPURL"}
-	values := []string{user.Username, user.Email, user.Password, user.PFPURL}
+	fields := []string{"FullName", "Username", "Email", "Password", "PfpURL"}
+	values := []string{user.FullName, user.Username, user.Email, user.Password, user.PfpURL}
 
 	err, stat := database.Insert("Users", fields, values, id)
 	return err, stat
 }
 
 func (user *User) Get(param string, value string) (error, int) {
-	err, stat := database.Select("Users", param, value, &user.ID, &user.Username, &user.Email, &user.Password, &user.PFPURL)
+	err, stat := database.Select("Users", param, value, &user.ID, &user.FullName, &user.Username, &user.Email, &user.Password, &user.PfpURL)
 	return err, stat
 }
 
@@ -37,7 +38,7 @@ func (user *User) GetByToken(value string) (error, int) {
 		return errors.New("Failed to validate token"), fiber.StatusBadRequest
 	}
 
-	err, _ = database.Select("Users", "ID", strconv.Itoa(token.UserID), &user.ID, &user.Username, &user.Email, &user.Password, &user.PFPURL)
+	err, _ = database.Select("Users", "ID", strconv.Itoa(token.UserID), &user.ID, &user.FullName, &user.Username, &user.Email, &user.Password, &user.PfpURL)
 	if err != nil {
 		return errors.New("Failed to validate token"), fiber.StatusBadRequest
 	}
@@ -46,8 +47,8 @@ func (user *User) GetByToken(value string) (error, int) {
 }
 
 func (user *User) Put(param string, value string) (error, int) {
-	fields := []string{"Username", "Email", "Password", "PFPURL"}
-	values := []string{user.Username, user.Email, user.Password, user.PFPURL}
+	fields := []string{"FullName", "Username", "Email", "Password", "PfpURL"}
+	values := []string{user.FullName, user.Username, user.Email, user.Password, user.PfpURL}
 
 	err, stat := database.Update("Users", param, value, fields, values)
 	return err, stat

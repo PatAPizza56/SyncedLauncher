@@ -8,8 +8,15 @@ import (
 	"../../../structs"
 )
 
+type RegisterResponse struct {
+	UserID    int
+	UserToken string
+}
+
 func Post(c *fiber.Ctx) error {
-	var value string
+	var newUserID int
+	var newUserToken string
+
 	register := new(structs.Register)
 
 	err := c.BodyParser(register)
@@ -29,11 +36,11 @@ func Post(c *fiber.Ctx) error {
 		return c.Send([]byte("Password must be at least 8 characters long"))
 	}
 
-	err, stat := register.Attempt(&value)
+	err, stat := register.Attempt(&newUserID, &newUserToken)
 	if err != nil {
 		c.Status(stat)
 		return c.Send([]byte(err.Error()))
 	}
 
-	return c.SendString(value)
+	return c.JSON(&RegisterResponse{UserID: newUserID, UserToken: newUserToken})
 }

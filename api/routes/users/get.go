@@ -7,6 +7,12 @@ import (
 	"../../utils"
 )
 
+type UserResponse struct {
+	ID       int
+	Username string
+	PfpURL   string
+}
+
 func Get(c *fiber.Ctx) error {
 	var user structs.User
 
@@ -16,7 +22,5 @@ func Get(c *fiber.Ctx) error {
 		return err
 	}
 
-	user.Password = ""
-
-	return c.JSON(user)
+	return c.JSON(&UserResponse{ID: user.ID, Username: user.Username, PfpURL: user.PfpURL})
 }

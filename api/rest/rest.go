@@ -7,6 +7,8 @@ import (
 	"../routes/auth/login"
 	"../routes/auth/register"
 	"../routes/games"
+	"../routes/stripe/connect"
+	"../routes/user"
 	"../routes/users"
 )
 
@@ -20,8 +22,6 @@ func Start() {
 		ExposeHeaders: "Origin",
 	}))
 
-	app.Use()
-
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Welcome to the Synced Studios API")
 	})
@@ -31,9 +31,13 @@ func Start() {
 	app.Put("/games/:value", games.Put)
 	app.Delete("/games/:value", games.Delete)
 
+	app.Get("/user/:value", user.Get)
+
 	app.Get("/users/:value", users.Get)
 	app.Put("/users/:value", users.Put)
 	app.Delete("/users/:value", users.Delete)
+
+	app.Get("/stripe/connect/:value", connect.Get)
 
 	app.Post("/auth/login", login.Post)
 	app.Post("/auth/register", register.Post)

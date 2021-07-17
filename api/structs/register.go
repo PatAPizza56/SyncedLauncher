@@ -10,12 +10,13 @@ import (
 )
 
 type Register struct {
+	FullName string
 	Username string
 	Email    string
 	Password string
 }
 
-func (register *Register) Attempt(value *string) (error, int) {
+func (register *Register) Attempt(newUserID *int, newUserToken *string) (error, int) {
 	var user User
 	var userID int
 
@@ -34,7 +35,7 @@ func (register *Register) Attempt(value *string) (error, int) {
 		return errors.New("Failed to hash password"), fiber.StatusConflict
 	}
 
-	user = User{Username: register.Username, Email: register.Email, Password: string(hashedPassword), PFPURL: "https://cdn.discordapp.com/avatars/538009668035805195/a491901ebe4517dced854b7beb46341d.webp?size=128"}
+	user = User{FullName: register.FullName, Username: register.Username, Email: register.Email, Password: string(hashedPassword), PfpURL: "https://cdn.discordapp.com/attachments/814608238917451776/860550308986880020/unknown.png"}
 
 	err, stat := user.Post(&userID)
 	if err != nil {
@@ -53,7 +54,8 @@ func (register *Register) Attempt(value *string) (error, int) {
 		return err, stat
 	}
 
-	*value = token.Value
+	*newUserID = userID
+	*newUserToken = token.Value
 
 	return nil, 0
 }
