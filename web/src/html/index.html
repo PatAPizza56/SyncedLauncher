@@ -1,63 +1,162 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/png" href="/static/icons/favicon.ico" />
-    <link rel="preload" href="/static/css/web.css" as="style" />
-    <link rel="stylesheet" href="/static/css/web.css" />
+<head>
+  <link rel="stylesheet" href="/static/css/global.css" />
 
-    <title>Synced Studios</title>
-  </head>
+  <script src="/static/js/nav.js"></script>
+  <link rel="stylesheet" href="/static/css/nav.css" />
 
-  <body class="bcol-g5">
-    <div id="root" class="flx flx-1 flx-dir-col hgt-100">
-      <div>
-        <div
-          class="
-            flx flx-1 flx-dir-row flx-aln-ctr flx-jfy-btwn
-            hgt-xlge
-            pad-hor-xlge
-            bcol-g5
-          "
-        >
-          <a id="logoBtn" href="/home">
-            <svg width="46" height="26" viewBox="0 0 46 26" class="fcol-clr">
-              <path
-                stroke-width="4"
-                d="M23 13L13 23L3 13L13 3L23 13ZM23 13L33 3L43 13L33 23L23 13Z"
-                class="scol-a2"
-              />
-            </svg>
-          </a>
+  <script src="/static/js/input.js"></script>
+  <link rel="stylesheet" href="/static/css/input.css" />
 
-          <div class="flx flx-1 flx-dir-row flx-aln-ctr flx-jfy-end">
-            <a
-              id="homeBtn"
-              href="/home"
-              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
-            >
-              <p>Home</p>
-            </a>
-            <a
-              id="shopBtn"
-              href="/shop"
-              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
-            >
-              <p>Shop</p>
-            </a>
-            <a
-              id="gamesBtn"
-              href="/games"
-              class="flx flx-aln-ctr flx-jfy-ctr wth-xlge hgt-lge col-g2"
-            >
-              <p>Games</p>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+  <script src="/static/js/btn.js"></script>
+  <link rel="stylesheet" href="/static/css/btn.css" />
+</head>
+
+<body>
+  <div id="nav"></div>
+  <script>
+    nav("nav");
+  </script>
+
+  <main>
+    <section class="left">
+      <h1>
+        <span>Syncing</span> developers and<br />gamers around the world.
+      </h1>
+      <p>
+        Synced is a platform built to simplify the process of connecting
+        gamers<br />to games they love, while allowing developers to publish
+        with ease.<br /><br />With a constantly growing userbase, join us in
+        discovering and<br />providing games of the future!
+      </p>
+      <div id="register" style="width: 9.375rem; height: 3.125rem"></div>
+      <script>
+        btnFillLink("register", "Register", "p b", "/register");
+      </script>
+      <span>
+        <a class="small" href="/login">Login</a>
+      </span>
+    </section>
+    <section class="right">
+      <svg class="top" viewBox="0 0 282 388">
+        <path d="M303 8.5C207.834 -1.33334 15.0002 3.19999 5.00024 100C-4.99976 196.8 199.5 329.333 303 383.5" stroke="url(#linear)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <defs>
+          <linearGradient id="linear" x1="153.823" y1="4.92392" x2="153.823" y2="383.5" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0082FB" />
+            <stop offset="1" stop-color="#0019FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <svg class="logo" viewBox="0 0 358 202">
+        <path d="M179 101L101 179L23 101L101 23L179 101ZM179 101L257 23L335 101L257 179L179 101Z" stroke="url(#linear)" stroke-width="31.2" />
+        <defs>
+          <linearGradient id="linear" x1="153.823" y1="4.92392" x2="153.823" y2="383.5" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0082FB" />
+            <stop offset="1" stop-color="#0019FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <svg class="bottom" viewBox="0 0 603 232">
+        <path d="M631 158C512 185 340 4.50004 218 4.5C37.0002 4.49994 4.50008 186.5 4.5 254" stroke="url(#linear)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <defs>
+          <linearGradient id="linear" x1="153.823" y1="4.92392" x2="153.823" y2="383.5" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0082FB" />
+            <stop offset="1" stop-color="#0019FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </section>
+  </main>
+</body>
+<style>
+  main {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    height: calc(100% - 6.25rem);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  section.left {
+    align-items: flex-start;
+    justify-content: center;
+
+    padding-left: 6.25rem;
+
+    transform: translateY(-3.125rem);
+  }
+
+  section.left>h1 {
+    margin-bottom: 0.625rem;
+    color: var(--gray-100)
+  }
+
+  section.left>h1>span {
+    color: var(--accent-100)
+  }
+
+  section.left>p {
+    margin-bottom: 3.125rem;
+    color: var(--gray-100)
+  }
+
+  section.left>div {
+    margin-bottom: 0.625rem;
+  }
+
+  section.left>span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 9.375rem;
+  }
+
+  section.left>span>a {
+    text-decoration: underline;
+    color: var(--accent-100);
+  }
+
+  section.right {
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  section.right>svg.top {
+    width: 17.625rem;
+    height: 24.25rem;
+
+    fill: none;
+  }
+
+  section.right>svg.logo {
+    width: 22.375rem;
+    height: 12.625rem;
+    margin: 0rem 6.25rem 0rem 0rem;
+
+    fill: none;
+
+    transform: translateY(-6.25rem);
+  }
+
+  section.right>svg.bottom {
+    width: 37.688rem;
+    height: 14.5rem;
+
+    fill: none;
+  }
+</style>
+
 </html>

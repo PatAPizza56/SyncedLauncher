@@ -28,6 +28,9 @@ func Post(c *fiber.Ctx) error {
 	if len(register.Username) < 2 {
 		c.Status(fiber.StatusBadRequest)
 		return c.Send([]byte("Username must be at least 2 characters long"))
+	} else if len(register.Email) < 2 {
+		c.Status(fiber.StatusBadRequest)
+		return c.Send([]byte("Email must be at least 2 characters long"))
 	} else if !strings.Contains(register.Email, "@") {
 		c.Status(fiber.StatusBadRequest)
 		return c.Send([]byte("Please enter a valid email"))

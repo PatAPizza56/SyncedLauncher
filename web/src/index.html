@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/global.css" />
+
+    <script src="../js/nav.js"></script>
+    <link rel="stylesheet" href="../css/nav.css" />
+
+    <script src="../js/input.js"></script>
+    <link rel="stylesheet" href="../css/input.css" />
+
+    <script src="../js/btn.js"></script>
+    <link rel="stylesheet" href="../css/btn.css" />
+  </head>
+  <body>
+    <div id="nav"></div>
+    <script>
+      nav("nav");
+    </script>
+
+    <div id="InputUsername" style="width: 520px"></div>
+    <script>
+      input(
+        "InputUsername",
+        "Username",
+        "",
+        "A username must be short, memorable, and unique"
+      );
+    </script>
+
+    <div id="button" style="width: 150px; height: 50px"></div>
+    <script>
+      btnOutline("button", "Purchase", "p b", () => alert("on click"));
+    </script>
+
+    <div id="button2" style="width: 80px; height: 30px"></div>
+    <script>
+      btnFillLink("button2", "Purchase", "small", "/register");
+    </script>
+  </body>
+</html>

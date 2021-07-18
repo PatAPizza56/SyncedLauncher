@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/static/css/global.css" />
+
+  <script src="/static/js/nav.js"></script>
+  <link rel="stylesheet" href="/static/css/nav.css" />
+
+  <script src="/static/js/input.js"></script>
+  <link rel="stylesheet" href="/static/css/input.css" />
+
+  <script src="/static/js/btn.js"></script>
+  <link rel="stylesheet" href="/static/css/btn.css" />
+</head>
+
+<body>
+  <div id="nav"></div>
+  <script>
+    nav("nav");
+  </script>
+
+  <main>
+    <h3>Error: 404</h3>
+    <p>This page cannot be found, or is not currently public. Synced Store is<br />in development, meaning not all pages are currently available.</p>
+  </main>
+</body>
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    height: calc(100% - 6.25rem);
+  }
+
+  h3 {
+    color: var(--gray-100);
+  }
+
+  p {
+    color: var(--gray-200);
+  }
+</style>
+
+</html>
