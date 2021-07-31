@@ -1,204 +1,262 @@
 <html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/global.css" />
 
-<head>
-  <link rel="stylesheet" href="/static/css/global.css" />
+    <script src="/static/js/nav.js"></script>
+    <link rel="stylesheet" href="/static/css/nav.css" />
 
-  <script src="/static/js/nav.js"></script>
-  <link rel="stylesheet" href="/static/css/nav.css" />
+    <script src="/static/js/input.js"></script>
+    <link rel="stylesheet" href="/static/css/input.css" />
 
-  <script src="/static/js/input.js"></script>
-  <link rel="stylesheet" href="/static/css/input.css" />
+    <script src="/static/js/btn.js"></script>
+    <link rel="stylesheet" href="/static/css/btn.css" />
+  </head>
 
-  <script src="/static/js/btn.js"></script>
-  <link rel="stylesheet" href="/static/css/btn.css" />
-</head>
+  <body>
+    <div id="nav"></div>
+    <script>
+      nav("nav");
+    </script>
 
-<body>
-  <div id="nav"></div>
-  <script>
-    nav("nav");
-  </script>
-
-  <main>
-    <section class="left">
-      <div id="InputUsername" style="width: 520px"></div>
-      <script>
-        input(
-          "InputUsername",
-          "Username",
-          "",
-          "A username must be short, memorable, and unique"
-        );
-      </script>
-      <div id="InputEmail" style="width: 520px"></div>
-      <script>
-        input(
-          "InputEmail",
-          "Email",
-          "",
-          "An email must be valid and owned by you."
-        );
-      </script>
-      <div id="InputPassword" style="width: 520px"></div>
-      <script>
-        input(
-          "InputPassword",
-          "Password",
-          "",
-          "A password must contain a variety of characters and be unique"
-        );
-      </script>
-
-      <span>
-        <div id="CreateButton" style="width: 150px; height: 50px"></div>
+    <main>
+      <section class="left">
+        <div id="InputUsername" style="width: 520px"></div>
         <script>
-          btnOutline("CreateButton", "Create", "p b", () => {
-            let username = document.getElementById("InputUsernameField");
-            let email = document.getElementById("InputEmailField");
-            let password = document.getElementById("InputPasswordField");
-
-            let info = {
-              FullName: "NotDefined",
-              Username: username.value,
-              Email: email.value,
-              Password: password.value
-            };
-            fetch("https://api.syncedstudios.com/auth/register", {
-              method: "POST",
-              body: JSON.stringify(info)
-            }).then(function(res) {
-              if (!res.ok) {
-                if (username.value == "") document.getElementById("InputUsernameWarning").textContent = "Username is a required field";
-                else if (username.value.length < 2) document.getElementById("InputUsernameWarning").textContent = "Username must contain at least 2 characters";
-                else document.getElementById("InputUsernameWarning").textContent = "";
-
-                if (email.value == "") document.getElementById("InputEmailWarning").textContent = "Email is a required field";
-                else if (email.value.length < 2) document.getElementById("InputEmailWarning").textContent = "Email must contain at least 2 characters";
-                else if (!email.value.includes("@")) document.getElementById("InputEmailWarning").textContent = "Email must contain an '@'";
-                else if (!email.value.includes(".")) document.getElementById("InputEmailWarning").textContent = "Email must contain a '.'";
-                else document.getElementById("InputEmailWarning").textContent = "";
-
-                if (password.value == "") document.getElementById("InputPasswordWarning").textContent = "Password is a required field";
-                else if (password.value.length < 8) document.getElementById("InputPasswordWarning").textContent = "Password must contain at least 8 characters";
-                else document.getElementById("InputPasswordWarning").textContent = "";
-
-              } else {
-                window.location.href = "/register/success";
-              }
-            });
-          });
+          input(
+            "InputUsername",
+            "Username",
+            "",
+            "A username must be short, memorable, and unique"
+          );
+        </script>
+        <div id="InputEmail" style="width: 520px"></div>
+        <script>
+          input(
+            "InputEmail",
+            "Email",
+            "",
+            "An email must be valid and owned by you."
+          );
+        </script>
+        <div id="InputPassword" style="width: 520px"></div>
+        <script>
+          input(
+            "InputPassword",
+            "Password",
+            "",
+            "A password must contain a variety of characters and be unique"
+          );
         </script>
 
-        <small>By creating an account, you agree to our<br /><a href="/privacy-policy">Privacy Policy</a> and <a href="/user-agreement">User Agreement</a></small>
-      </span>
-    </section>
-    <section class="right">
-      <svg class="top" viewBox="0 0 282 388">
-        <path d="M303 8.5C207.834 -1.33334 15.0002 3.19999 5.00024 100C-4.99976 196.8 199.5 329.333 303 383.5" stroke="url(#linear)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-        <defs>
-          <linearGradient id="linear" x1="153.823" y1="4.92392" x2="153.823" y2="383.5" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#0082FB" />
-            <stop offset="1" stop-color="#0019FB" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <h1>Create your<br /><span>Synced</span> account</h1>
-      <svg class="bottom" viewBox="0 0 603 232">
-        <path d="M631 158C512 185 340 4.50004 218 4.5C37.0002 4.49994 4.50008 186.5 4.5 254" stroke="url(#linear)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-        <defs>
-          <linearGradient id="linear" x1="153.823" y1="4.92392" x2="153.823" y2="383.5" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#0082FB" />
-            <stop offset="1" stop-color="#0019FB" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </section>
-  </main>
-</body>
-<style>
-  main {
-    display: flex;
-    flex-direction: row;
+        <span>
+          <div id="CreateButton" style="width: 150px; height: 50px"></div>
+          <script>
+            btnOutline("CreateButton", "Create", "p b", () => {
+              let username = document.getElementById("InputUsernameField");
+              let email = document.getElementById("InputEmailField");
+              let password = document.getElementById("InputPasswordField");
 
-    align-items: center;
-    justify-content: center;
+              fetch("https://api.syncedstudios.com/auth/register", {
+                method: "POST",
+                body: JSON.stringify({
+                  FullName: "NotDefined",
+                  Username: username.value,
+                  Email: email.value,
+                  Password: password.value,
+                }),
+              }).then(function (res) {
+                if (!res.ok) {
+                  if (username.value == "")
+                    document.getElementById(
+                      "InputUsernameWarning"
+                    ).textContent = "Username is a required field";
+                  else if (username.value.length < 2)
+                    document.getElementById(
+                      "InputUsernameWarning"
+                    ).textContent =
+                      "Username must contain at least 2 characters";
+                  else
+                    document.getElementById(
+                      "InputUsernameWarning"
+                    ).textContent = "";
 
-    height: calc(100% - 6.25rem);
-  }
+                  if (email.value == "")
+                    document.getElementById("InputEmailWarning").textContent =
+                      "Email is a required field";
+                  else if (email.value.length < 2)
+                    document.getElementById("InputEmailWarning").textContent =
+                      "Email must contain at least 2 characters";
+                  else if (!email.value.includes("@"))
+                    document.getElementById("InputEmailWarning").textContent =
+                      "Email must contain an '@'";
+                  else if (!email.value.includes("."))
+                    document.getElementById("InputEmailWarning").textContent =
+                      "Email must contain a '.'";
+                  else
+                    document.getElementById("InputEmailWarning").textContent =
+                      "";
 
-  section {
-    display: flex;
-    flex-direction: column;
+                  if (password.value == "")
+                    document.getElementById(
+                      "InputPasswordWarning"
+                    ).textContent = "Password is a required field";
+                  else if (password.value.length < 8)
+                    document.getElementById(
+                      "InputPasswordWarning"
+                    ).textContent =
+                      "Password must contain at least 8 characters";
+                  else
+                    document.getElementById(
+                      "InputPasswordWarning"
+                    ).textContent = "";
+                } else {
+                  window.location.href = "/register/success";
+                }
+              });
+            });
+          </script>
 
-    width: 100%;
-    height: 100%;
-  }
+          <small
+            >By creating an account, you agree to our<br /><a
+              href="/privacy-policy"
+              >Privacy Policy</a
+            >
+            and <a href="/user-agreement">User Agreement</a></small
+          >
+        </span>
+      </section>
+      <section class="right">
+        <svg class="top" viewBox="0 0 282 388">
+          <path
+            d="M303 8.5C207.834 -1.33334 15.0002 3.19999 5.00024 100C-4.99976 196.8 199.5 329.333 303 383.5"
+            stroke="url(#linear)"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <defs>
+            <linearGradient
+              id="linear"
+              x1="153.823"
+              y1="4.92392"
+              x2="153.823"
+              y2="383.5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#0082FB" />
+              <stop offset="1" stop-color="#0019FB" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1>Create your<br /><span>Synced</span> account</h1>
+        <svg class="bottom" viewBox="0 0 603 232">
+          <path
+            d="M631 158C512 185 340 4.50004 218 4.5C37.0002 4.49994 4.50008 186.5 4.5 254"
+            stroke="url(#linear)"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <defs>
+            <linearGradient
+              id="linear"
+              x1="153.823"
+              y1="4.92392"
+              x2="153.823"
+              y2="383.5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#0082FB" />
+              <stop offset="1" stop-color="#0019FB" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </section>
+    </main>
+  </body>
+  <style>
+    main {
+      display: flex;
+      flex-direction: row;
 
-  section.left {
-    align-items: flex-start;
-    justify-content: center;
+      align-items: center;
+      justify-content: center;
 
-    padding-left: 6.25rem;
+      height: calc(100% - 6.25rem);
+    }
 
-    transform: translateY(-3.125rem);
-  }
+    section {
+      display: flex;
+      flex-direction: column;
 
-  section.left>div {
-    margin-bottom: 1.25rem;
-  }
+      width: 100%;
+      height: 100%;
+    }
 
-  #InputPassword input {
-    -webkit-text-security: disc;
-  }
+    section.left {
+      align-items: flex-start;
+      justify-content: center;
 
-  section.left>span {
-    display: flex;
-    flex-direction: row;
+      padding-left: 6.25rem;
 
-    align-items: center;
-    justify-content: flex-start;
-  }
+      transform: translateY(-3.125rem);
+    }
 
-  section.left>span>small {
-    margin-left: 1.25rem;
-    color: var(--gray-100);
-  }
+    section.left > div {
+      margin-bottom: 1.25rem;
+    }
 
-  section.left>span>small>a {
-    text-decoration: underline;
-    color: var(--accent-100);
-  }
+    #InputPassword input {
+      -webkit-text-security: disc;
+    }
 
-  section.right {
-    align-items: flex-end;
-    justify-content: space-between;
-  }
+    section.left > span {
+      display: flex;
+      flex-direction: row;
 
-  section.right>svg.top {
-    width: 17.625rem;
-    height: 24.25rem;
+      align-items: center;
+      justify-content: flex-start;
+    }
 
-    fill: none;
-  }
+    section.left > span > small {
+      margin-left: 1.25rem;
+      color: var(--gray-100);
+    }
 
-  section.right>h1 {
-    margin-right: 6.25rem;
+    section.left > span > small > a {
+      text-decoration: underline;
+      color: var(--accent-100);
+    }
 
-    color: var(--gray-100);
+    section.right {
+      align-items: flex-end;
+      justify-content: space-between;
+    }
 
-    transform: translateY(-6.25rem);
-  }
+    section.right > svg.top {
+      width: 17.625rem;
+      height: 24.25rem;
 
-  section.right>h1>span {
-    color: var(--accent-100);
-  }
+      fill: none;
+    }
 
-  section.right>svg.bottom {
-    width: 37.688rem;
-    height: 14.5rem;
+    section.right > h1 {
+      margin-right: 6.25rem;
 
-    fill: none;
-  }
-</style>
+      color: var(--gray-100);
 
+      transform: translateY(-6.25rem);
+    }
+
+    section.right > h1 > span {
+      color: var(--accent-100);
+    }
+
+    section.right > svg.bottom {
+      width: 37.688rem;
+      height: 14.5rem;
+
+      fill: none;
+    }
+  </style>
 </html>
